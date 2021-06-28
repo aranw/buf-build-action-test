@@ -1,6 +1,5 @@
-on:
-  workflow_dispatch:
-
+name: Lint, generate code and run tests
+on: [push]
 jobs:
   lint-build:
     name: buf check lint
