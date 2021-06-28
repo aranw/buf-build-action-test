@@ -24,7 +24,7 @@ jobs:
           go version
       - name: can we find protoc-gen-validate?
         run: |
-          ls -al .bin/
+          tree 
       - uses: aranw/build-buf-action@feature/envoy-validate
         with:
           bufVersion: v0.43.2
