@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package = "github.com/aranw/buff-build-action-test/api/v1;testv1";
+option go_package = "github.com/aranw/buff-build-action-test/api/test/v1;testv1";
 
-package api.test.v1;
+package test.v1;
 
 import "validate/validate.proto";
 
