@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "github.com/aranw/buff-build-action-test/api/v1;testv1";
+
+package api.test.v1;
+
+import "validate/validate.proto";
+
+service TestService {
+    rpc GetTest(GetTestRequest) returns (GetTestResponse) {}
+} 
+
+message Test {
+    string id = 1 [(validate.rules).string.uuid = true];
+}
+
+message GetTestRequest {}
+
+message GetTestResponse {
+    Test test = 1;
+}

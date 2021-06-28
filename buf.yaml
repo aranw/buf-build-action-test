@@ -1,0 +1,7 @@
+version: v1beta1
+name: buf.build/aranw/buf-build-action-test
+deps:
+  - buf.build/beta/protoc-gen-validate
+build:
+  roots:
+    - api
