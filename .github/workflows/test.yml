@@ -6,8 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Go
-        uses: actions/setup-go@v2
       - name: Lint proto definitions
         uses: ory/build-buf-action@v0
         with:
@@ -21,6 +19,9 @@ jobs:
           bufArgs: breaking --against ".git#branch=main"
       - name: Remove old generated code
         run: find api/ -name *.go -delete
+      - name: what version of go
+        run: |
+          go version
       - uses: aranw/build-buf-action@feature/envoy-validate
         with:
           bufVersion: v0.31.1
