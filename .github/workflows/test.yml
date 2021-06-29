@@ -1,5 +1,6 @@
 name: Lint, generate code and run tests
 on: [push]
+
 jobs:
   lint-build:
     name: buf check lint
@@ -24,8 +25,12 @@ jobs:
           github_token: ${{ github.token }}
       - name: Checking protobufs for breaking changes
         uses: bufbuild/buf-breaking-action@v0.2.0
+        # env:
+        #   BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
+        #   BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
         with:
           against: 'https://github.com/aranw/buf-build-action-test.git#branch=main,ref=HEAD~1'
+          github_token: ${{ github.token }}
       - name: Remove old generated code
         run: find api/ -name *.go -delete
       - name: Generate protobufs
