@@ -11,7 +11,6 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // TestServiceClient is the client API for TestService service.
@@ -31,7 +30,7 @@ func NewTestServiceClient(cc grpc.ClientConnInterface) TestServiceClient {
 
 func (c *testServiceClient) GetTest(ctx context.Context, in *GetTestRequest, opts ...grpc.CallOption) (*GetTestResponse, error) {
 	out := new(GetTestResponse)
-	err := c.cc.Invoke(ctx, "/api.test.v1.TestService/GetTest", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/test.v1.TestService/GetTest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +62,7 @@ type UnsafeTestServiceServer interface {
 }
 
 func RegisterTestServiceServer(s grpc.ServiceRegistrar, srv TestServiceServer) {
-	s.RegisterService(&TestService_ServiceDesc, srv)
+	s.RegisterService(&_TestService_serviceDesc, srv)
 }
 
 func _TestService_GetTest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -76,7 +75,7 @@ func _TestService_GetTest_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.test.v1.TestService/GetTest",
+		FullMethod: "/test.v1.TestService/GetTest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TestServiceServer).GetTest(ctx, req.(*GetTestRequest))
@@ -84,11 +83,8 @@ func _TestService_GetTest_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-// TestService_ServiceDesc is the grpc.ServiceDesc for TestService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var TestService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.test.v1.TestService",
+var _TestService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "test.v1.TestService",
 	HandlerType: (*TestServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -97,5 +93,5 @@ var TestService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "test.proto",
+	Metadata: "test/v1/test.proto",
 }
