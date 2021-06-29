@@ -1,5 +1,7 @@
 name: Lint, generate code and run tests
 on: [push]
+env:
+  TOKEN: ${{ github.token }}
 jobs:
   lint-build:
     name: buf check lint
@@ -28,7 +30,7 @@ jobs:
         #   BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
         #   BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
         with:
-          against: 'https://github.com/aranw/buff-build-action-test.git#branch=main,ref=HEAD~1'
+          against: 'https://x-oauth-basic:${TOKEN}@github.com/aranw/buff-build-action-test.git#branch=main,ref=HEAD~1'
           github_token: ${{ github.token }}
       - name: Remove old generated code
         run: find api/ -name *.go -delete
