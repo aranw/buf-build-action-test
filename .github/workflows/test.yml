@@ -18,20 +18,10 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.27.1
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
           go install github.com/envoyproxy/protoc-gen-validate@v0.6.1
-  lint:
-    needs: setup
-    name: Lint Protobufs
-    runs-on: ubuntu-latest
-    steps:
       - name: Lint protobufs
         uses: bufbuild/buf-lint-action@v0.2.0
         with:
           github_token: ${{ github.token }}
-  breaking:
-    needs: lint
-    name: Check for breaking changes
-    runs-on: ubuntu-latest
-    steps:
       - name: Checking protobufs for breaking changes
         uses: bufbuild/buf-breaking-action@v0.2.0
         # env:
@@ -40,11 +30,6 @@ jobs:
         with:
           against: 'https://github.com/aranw/buf-build-action-test.git#branch=master,ref=HEAD~1'
           github_token: ${{ github.token }}
-  generate:
-    needs: breaking
-    name: Generate protobufs
-    runs-on: ubuntu-latest
-    steps:
       - name: Remove old generated code
         run: find api/ -name *.go -delete
       - name: Generate protobufs
