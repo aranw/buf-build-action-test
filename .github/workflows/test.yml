@@ -29,7 +29,7 @@ jobs:
         #   BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
         with:
           against: 'https://github.com/aranw/buff-build-action-test.git#branch=main,ref=HEAD~1'
-          # github_token: ${{ github.token }}
+          github_token: ${{ github.token }}
       - name: Remove old generated code
         run: find api/ -name *.go -delete
       - name: Generate protobufs
