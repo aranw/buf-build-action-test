@@ -53,6 +53,8 @@ func (m *Test) Validate() error {
 
 	// no validation rules for Name
 
+	// no validation rules for Test
+
 	return nil
 }
 
