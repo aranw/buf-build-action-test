@@ -25,7 +25,7 @@ jobs:
       - name: Checking protobufs for breaking changes
         uses: bufbuild/buf-breaking-action@v0.2.0
         with:
-          against: 'https://x-oauth-basic:${TOKEN}@github.com/aranw/buf-build-action-test.git#branch=main,ref=HEAD~1'
+          against: 'https://github.com/aranw/buf-build-action-test.git#branch=main,ref=HEAD~1'
       - name: Remove old generated code
         run: find api/ -name *.go -delete
       - name: Generate protobufs
