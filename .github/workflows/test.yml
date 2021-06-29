@@ -18,29 +18,22 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.27.1
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
           go install github.com/envoyproxy/protoc-gen-validate@v0.6.1
-      - name: Lint proto definitions
-        uses: ory/build-buf-action@v0
+      - name: Lint protobufs
+        uses: bufbuild/buf-lint-action@v0.2.0
         with:
-          bufVersion: v0.43.2
-          bufArgs: lint
-      - name: Check proto for breaking changes against the last release
-        if: false
-        uses: ory/build-buf-action@v0
+          github_token: ${{ github.token }}
+      - name: Checking protobufs for breaking changes
+        uses: bufbuild/buf-breaking-action@v0.2.0
+        # env:
+        #   BUF_INPUT_HTTPS_USERNAME: ${{ github.actor }}
+        #   BUF_INPUT_HTTPS_PASSWORD: ${{ github.token }}
         with:
-          bufVersion: v0.43.2
-          bufArgs: breaking --against ".git#branch=main"
+          against: 'https://github.com/aranw/buff-build-action-test.git#branch=main,ref=HEAD~1'
+          # github_token: ${{ github.token }}
       - name: Remove old generated code
         run: find api/ -name *.go -delete
       - name: Generate protobufs
         run: buf generate --config buf.yaml --template buf.gen.yaml
-      # - uses: aranw/build-buf-action@feature/envoy-validate
-      #   with:
-      #     bufVersion: v0.43.2
-      #     protocPlugins:
-      #       go@v1.25.0 go-grpc@v1.0.1 python_betterproto@2.0.0b2 ts-proto@1.39.0
-      #       grpc-java@1.34.0 envoy-gen-validate@v0.6.1
-      #     bufArgs:
-      #       generate --config buf.yaml --template buf.gen.yaml
       - name: Commit new code
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v7
