@@ -14,6 +14,8 @@ message Test {
     string id = 1 [(validate.rules).string.uuid = true];
     string name = 2;
     string test = 3;
+    string update = 4;
+    string broken = 3;
 }
 
 message GetTestRequest {}
