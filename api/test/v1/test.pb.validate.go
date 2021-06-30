@@ -55,6 +55,14 @@ func (m *Test) Validate() error {
 
 	// no validation rules for Test
 
+	// no validation rules for Update
+
+	// no validation rules for Broken
+
+	// no validation rules for Hello
+
+	// no validation rules for IsCool
+
 	return nil
 }
 
