@@ -17,6 +17,7 @@ message Test {
     string update = 4;
     string broken = 5;
     string hello = 6;
+    bool is_cool = 7;
 }
 
 message GetTestRequest {}
