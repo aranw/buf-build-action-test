@@ -13,7 +13,7 @@ jobs:
   proto-breaking:
     name: Run proto breaking check
     runs-on: ubuntu-latest
-    if: github.ref == 'ref/heads/master'
+    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
