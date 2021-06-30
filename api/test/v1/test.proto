@@ -15,8 +15,8 @@ message Test {
     string name = 2;
     string test = 3;
     string update = 4;
-    string broken = 3;
-    string hello = 5;
+    string broken = 5;
+    string hello = 6;
 }
 
 message GetTestRequest {}
