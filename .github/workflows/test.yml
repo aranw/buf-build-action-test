@@ -1,9 +1,5 @@
 name: Lint and Update Protobufs 
 on:
-  push:
-    branches:
-      - '*'
-      - '!master'
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -55,7 +51,7 @@ jobs:
       - name: Checking protobufs for breaking changes
         uses: bufbuild/buf-breaking-action@v0.2.0
         with:
-          against: 'https://x-oauth-basic:${{ env.TOKEN }}@github.com/buffup/golangpkg.git#branch=main,ref=HEAD'
+          against: 'https://github.com/aranw/buf-build-action-test.git#branch=master,ref=HEAD'
           github_token: ${{ env.TOKEN }}
   proto-build:
     name: Build protos and generate Go code
